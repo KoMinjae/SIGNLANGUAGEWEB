@@ -1,51 +1,63 @@
-//var mysql      = require('mysql');
-// 비밀번호는 별도의 파일로 분리해서 버전관리에 포함시키지 않아야 합니다. 
-//var connection = mysql.createConnection({
-//  host     : 'localhost',
-//  port : '3306',
-//  user     : 'root',
-//  password : '6725',
-//  database : 'sl'
-//});
+var fs = require('fs');
+var express    =  require("express");
+var mysql      = require('mysql');
+var ejs = require('ejs');
+var bodyParser = require('body-parser');
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : '6725',
+  database : 'sl'
+});
+var app = express();
+app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.json())
 
-//connection.connect();
+var test = fs.readFileSync('./html/searchpage.ejs', 'utf8');
 
-//connection.query('SELECT * FROM signlanguage', function (error, results, fields) {
-//    if (error) {
-//        console.log(error);
-//    }
-//    console.log(results);
-//});
+app.get('/', (req,res)=>{
+  var page = ejs.render(test,{
+    title:"Test",
+  });
+  res.send(page);
+})
+connection.connect(function(err){
+if(!err) {
+    console.log("Database is connected ... \n\n");
+} else {
+    console.log("Error connecting database ... \n\n");
+}
+});
+app.post('/search', function(req,res){
+  var body = req.body;
+  connection.query('SELECT * from signlanguage where title = ?',[body.test1], function(err, rows, fields) {
+  connection.end();
+  if (!err){
+    var page = ejs.render(test,{
+      title : "good",
+      data : rows,
+    });
+    res.send(page);
+    console.log('The solution is: ', rows);
+  }
+  else
+    console.log('Error while performing Query.');
+  });
+});
+app.get("/getdata?",function(req,res){
+  connection.query('SELECT * from signlanguage limit 2', function(err, rows, fields) {
+  connection.end();
+  if (!err){
+    var page = ejs.render(test,{
+      title : "good",
+      data : rows,
+    });
+    res.send(page);
+    console.log('The solution is: ', rows);
+  }
+  else
+    console.log('Error while performing Query.');
+  });
+});
 
-//connection.end();
-var express    =  require("express");  
-var mysql      = require('mysql');  
-var connection = mysql.createConnection({  
-  host     : 'localhost',  
-  user     : 'root',  
-  password : '6725',  
-  database : 'sl'  
-});  
-var app = express();  
-  
-connection.connect(function(err){  
-if(!err) {  
-    console.log("Database is connected ... \n\n");    
-} else {  
-    console.log("Error connecting database ... \n\n");    
-}  
-});  
-  
-app.get("/",function(request,response){  
-connection.query('SELECT * from signlanguage limit 2', function(err, rows, fields) {  
-connection.end();  
-  if (!err){  
-    response.send(rows);   
-    console.log('The solution is: ', rows);  
-  }  
-  else  
-    console.log('Error while performing Query.');  
-  });  
-});  
-  
-app.listen(3000);  
+app.listen(3000);

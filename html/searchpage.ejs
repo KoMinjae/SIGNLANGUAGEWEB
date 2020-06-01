@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      <%= title %>
+    </title>
+    <script language = "javascript">
+        function output(form) {
+          for(var i = 0; i < form.SearchCondition.length; i++) {
+            if(form.SearchCondition[i].checked) {
+              var SearchCondition = form.SearchCondition[i].value;
+           break;
+        }
+     }
+   }
+    </script>
+  </head>
+  <body>
+    <form action="/search" method="post">
+      <input type="radio" name="SearchCondition" checked="checked" value="단어"/>단어
+      <input type="radio" name="SearchCondition" value="문장"/>문장
+      <input type="text" name="test1"/>
+      <input type="button" value=OK onclick="output(this.form)"></input><br>
+      <button type="submit">테스트</button>
+      <br>
+
+    </form>
+    <form class="" action="/getdata" method="GET">
+      <input type="text" name="searchdata"/>
+      <button type="submit">테스트</button>
+    </form>
+    <br>
+    <% if(locals.data){%>
+    <% for(let i = 0; i<data.length; i++){%>
+      NAME: <%=data[i].title%>,Desc <%=data[i].DESC%><br>
+    <%}%>
+  <%}%>
+  </body>
+
+</html>
