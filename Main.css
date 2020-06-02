@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri&display=swap');
+
+*{
+box-sizing: border-box;
+magin:0;
+pdding:0;
+background-color:#ffffff;
+}
+li, a, button{
+	font-family: 'Hind Siliguri', sans-serif;
+	font-weight: 500;
+	font-size:17px;
+	color:#fd8a69;
+	text-decoration: none;
+}
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 30px 10%;
+}
+.nav__links{
+	list-style: none;
+}
+
+.nav__links li{
+	display: inline;
+	padding: 0px 20px;
+}
+.nav__links li a{
+	transition: all 0.3s ease 0s
+}
+.nav__links li a:hover{
+	color:#fd8a69;
+}
+.navbar-brand{
+	font-size:40px;
+	color:#fd8a69;
+	cursor: pointer;
+	margin-right: auto;
+}
+button {
+	padding: 9px 25px;
+	background-color: white;
+	border: none;
+	border-radius: 50px;
+	cursor: pointer;
+	transition: all 0.3s ease 0s;
+}
+button:hover {
+	background-color:  rgba(255, 0, 0, 0.5);
+}
+
+.carousel-indicators li {
+	border-color: #f4511e;
+}
+
+.carousel-indicators li.active {
+	background-color: #f4511e;
+}
+
+.item h4 {
+	font-size: 19px;
+	line-height: 1.375em;
+	font-weight: 400;
+	font-style: italic;
+	margin: 70px 0;
+}
+
+.navbar-right li a{
+	border: 0;
+	background-color:#f4511e;
+	color:white;
+	border-radius: 0;
+	margin-bottom:0;
+	font-size:12px;
+}
