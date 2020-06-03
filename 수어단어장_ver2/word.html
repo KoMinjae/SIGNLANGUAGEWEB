@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>나의 수어 단어장</title>
+  <style>
+body {
+	background-color: #efeff3;
+}
+
+h1 {
+  position: relative;
+  text-align: center;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+h1:after {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -75px;
+  width: 150px;
+  height: 2px;
+  background-color: #333;
+  content: '';
+}
+
+.product-image-manager:after {
+	display: block;
+	content: '';
+	clear: both;
+}
+
+/* Tooltip fix */
+.product-image-manager .tooltip {
+  white-space: nowrap;
+}
+
+.product-image-manager > .image-container {
+  display: inline-block;
+  margin: 0 -1.8px;
+	padding: 8px;
+	vertical-align: top;
+}
+
+.product-image-manager > .image-container.image-placeholder {
+  padding: 8px;
+}
+
+.product-image-manager[data-image-columns="1"] > .image-container { width: 100%; }
+.product-image-manager[data-image-columns="2"] > .image-container { width: 50%; }
+.product-image-manager[data-image-columns="3"] > .image-container { width: 33.3333333%; }
+.product-image-manager[data-image-columns="4"] > .image-container { width: 25%; }
+.product-image-manager[data-image-columns="5"] > .image-container { width: 20%; }
+.product-image-manager[data-image-columns="6"] > .image-container { width: 16.6666665%; }
+.product-image-manager[data-image-columns="7"] > .image-container { width: 14.2857143%; }
+.product-image-manager[data-image-columns="8"] > .image-container { width: 12.5%; }
+.product-image-manager[data-image-columns="9"] > .image-container { width: 11.1111111%; }
+.product-image-manager[data-image-columns="10"] > .image-container { width: 10%; }
+.product-image-manager[data-image-columns="11"] > .image-container { width: 9.09090909%; }
+.product-image-manager[data-image-columns="12"] > .image-container { width: 8.33333333%; }
+.product-image-manager[data-image-columns="13"] > .image-container { width: 7.69230769%; }
+.product-image-manager[data-image-columns="14"] > .image-container { width: 7.14285714%; }
+.product-image-manager[data-image-columns="15"] > .image-container { width: 6.66666666%; }
+
+.product-image-manager > .image-placeholder > .inner-placeholder {
+	border: dashed 1px #333;
+}
+
+.product-image-manager > .image-container > .inner-image-container:before, .product-image-manager > .image-placeholder > .inner-placeholder:before {
+	content: '';
+	display: block;
+	padding-top: 100%;
+
+}
+
+.product-image-manager > .image-container > .inner-image-container {
+	position: relative;
+	background-color: #fff;
+	-webkit-box-shadow: inset 0 0 0 1px rgba(0,0,0,.1);
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.1);
+    z-index: 1;
+}
+
+.product-image-manager > .image-container > .inner-image-container > .on-image-controls {
+	position: absolute;
+	top: 1px;
+	right: 1px;
+	left: 1px;
+	display: block;
+	padding: 5px;
+	text-align: center;
+	background-color: rgba(255,255,255,.8);
+	border-bottom: solid 1px #ccc;
+	z-index: 3;
+	opacity: 0;
+	visibility: hidden;
+}
+
+.product-image-manager > .image-container > .inner-image-container:hover > .on-image-controls {
+	opacity: 1;
+	visibility: visible;
+	-webkit-transition: all .3s ease;
+	-moz-transition: all .3s ease;
+	-ms-transition: all .3s ease;
+	-o-transition: all .3s ease;
+	transition: all .3s ease;
+}
+
+.product-image-manager > .image-container > .inner-image-container > .on-image-controls > .delete-confirm {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 100%;
+  color: #fff;
+  line-height: 31px;
+  background-color: #c0392b;
+  overflow: hidden;
+  cursor: pointer;
+  -webkit-transition: all .3s ease;
+	-moz-transition: all .3s ease;
+	-ms-transition: all .3s ease;
+	-o-transition: all .3s ease;
+	transition: all .3s ease;
+}
+.product-image-manager > .image-container > .inner-image-container > .on-image-controls > .delete-confirm.active {
+  width: 100%;
+}
+
+.product-image-manager > .image-container > .inner-image-container > .on-image-controls > .fa {
+	cursor: pointer;
+	margin: 0 5px;
+}
+
+.product-image-manager > .image-container > .inner-image-container > .on-image-controls > .fa-arrows {
+	cursor: move;
+}
+
+.product-image-manager > .image-container > .inner-image-container > .on-image-controls > .fa-check {
+	color: #2ecc71;
+}
+
+.product-image-manager > .image-container > .inner-image-container > .on-image-controls > .fa-info-circle {
+	color: #3498db;
+}
+
+.product-image-manager > .image-container > .inner-image-container > .on-image-controls > .fa-times {
+	color: #c0392b;
+}
+
+.product-image-manager > .image-container.picked-as-primary > .inner-image-container > .on-image-controls > .fa-check {
+	display: none;
+}
+
+.product-image-manager > .image-container > .inner-image-container > .center-container {
+	position: absolute;
+	top: 1px;
+	right: 1px;
+	bottom: 1px;
+	left: 1px;
+	overflow: hidden;
+}
+
+.product-image-manager > .image-container.picked-as-primary > .inner-image-container > .center-container:after {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 5px;
+	content: 'Primary image';
+	color: #fff;
+	font-size: 12px;
+	text-align: center;
+	background-color: #44c4e7;
+	z-index: 3;
+}
+
+.product-image-manager > .image-container > .inner-image-container > .center-container > img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-moz-transform: translateX(-50%) translateY(-50%);
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	-o-transform: translateX(-50%) translateY(-50%);
+	-ms-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+	z-index: 2;
+}
+
+.product-image-manager > .image-container.landscape > .inner-image-container > .center-container > img {
+	max-height: 100%;
+}
+
+.product-image-manager > .image-container.portrait > .inner-image-container> .center-container > img {
+	max-width: 100%;
+}
+
+.product-image-manager > .image-container.square > .inner-image-container> .center-container > img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.dropzone {
+	display: block;
+	margin: 20px 8px 20px 6.2px;
+	color: #aaa;
+	line-height: 100px;
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 18px;
+	border: dashed 3px #aaa;
+}
+
+#image-preview-modal {
+	margin-bottom: 20px;
+}
+
+#image-preview-modal > img {
+	display: block;
+	margin: 0 auto;
+	max-width: 100%;
+}
+
+.static-data > .file-info-list {
+	margin: 0 0 15px 0;
+	padding: 0;
+	list-style: none;
+}
+
+.static-data > .file-info-list:last-child {
+	margin: 0;
+}
+
+.svg-container {
+	background-color: #111;
+}
+  </style>
+  <script src="https://use.fontawesome.com/2d4e9228e5.js"></script><link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js'></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
+  <script>
+$(document).ready(function() {
+  
+	$('[data-toggle="tooltip"]').tooltip();
+
+	var imageColumns = Math.round($('.product-image-manager').width() / 145);
+	$('.product-image-manager').attr('data-image-columns', imageColumns);
+
+	$('.on-image-controls > .fa-info-circle').click(function() {
+		var image = $(this).parents('.image-container').find('img');
+		var path = image.attr('src');
+		var filename = path.replace(/\\/g, '/');
+		filename = filename.substring(filename.lastIndexOf('/')+ 1).replace(/[?#].+$/, '');
+		var extension = path.split('.').pop();
+		var filesize;
+		var dimensions = image.get(0).naturalWidth + ' x ' + image.get(0).naturalHeight;
+		var altText = image.attr('alt');
+		var title = image.attr('title');
+
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", path, true);
+		xhr.responseType = "arraybuffer";
+		xhr.onreadystatechange = function() {
+		    if(this.readyState == this.DONE) {
+		        if(this.response.byteLength >= 1000000) {
+		        	var filesize = this.response.byteLength/1000000;
+		        	filesize = Math.round(filesize * 10)/10 + ' MB';
+		        } else {
+		        	var filesize = Math.round(this.response.byteLength/1000) + ' KB';
+		        }
+
+		        $('.static-data #filesize').text(filesize);
+		    }
+		};
+		xhr.send(null);
+
+		$('#image-preview-modal').html('<img src="'+ path +'">');
+		$('.static-data #filename').text(filename);
+		//$('.static-data #file-extension').text('image/' + extension);
+		$('.static-data #file-dimensions').text(dimensions);
+
+		$('.dynamic-data #url').val(path);
+		$('.dynamic-data #title').val(title);
+		$('.dynamic-data #alt').val(altText);
+		$('.dynamic-data #full-image-link').attr('href', path);
+
+		$('#file-modal').modal('show');
+	});
+
+	$('.product-image-manager').sortable({
+		handle: '.fa-arrows',
+		helper: 'clone',
+		items: '> .image-container',
+		placeholder: 'image-container image-placeholder',
+    tolerance: 'pointer',
+		start: function(event, ui) {
+        	ui.placeholder.height(ui.item.height());
+        	ui.placeholder.html('<div class="inner-placeholder"></div>');
+      	}
+	});
+  
+  $('.on-image-controls > .fa-times').click(function() {
+    $(this).parent().find('.delete-confirm').addClass('active');
+  });
+  
+  $('.on-image-controls > .delete-confirm').click(function() {
+    $(this).parents('.image-container').remove();
+  });
+  
+  $('.product-image-manager > .image-container > .inner-image-container > .on-image-controls').mouseleave(function() {
+    $(this).find('.delete-confirm').removeClass('active');
+  });
+});
+
+$(window).load(function() {
+	$('.image-container').each(function() {
+		if($(this).find('img').width() > $(this).find('img').height()) {
+			$(this).addClass('landscape');
+		} else if($(this).find('img').width() < $(this).find('img').height()) {
+			$(this).addClass('portrait');
+		} else {
+			$(this).addClass('square');
+		}
+	});
+});
+
+$(window).resize(function() {
+	var imageColumns = Math.round($('.product-image-manager').width() / 145);
+	$('.product-image-manager').attr('data-image-columns', imageColumns);
+});
+  </script>
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>나의 수어 단어장</h1>
+      <div class="product-image-manager">
+        <div class="image-container">
+          <div class="inner-image-container">
+            <div class="on-image-controls">
+              <div class="delete-confirm">단어 삭제</div>
+              <span class="fa fa-arrows"></span>
+            
+              <span class="fa fa-times" data-toggle="tooltip" data-placement="top" title="단어삭제"></span>
+            </div>
+            <div class="center-container">
+              <img src="eun.jpg">
+            </div>
+          </div>
+        </div>
+        <div class="image-container">
+          <div class="inner-image-container">
+            <div class="on-image-controls">
+              <div class="delete-confirm">단어 삭제</div>
+              <span class="fa fa-arrows"></span>
+
+              <span class="fa fa-times" data-toggle="tooltip" data-placement="top" title="단어삭제"></span>
+            </div>
+            <div class="center-container">
+              <img src="fall.jpg" id="test">
+            </div>
+          </div>
+        </div>
+        <div class="image-container">
+          <div class="inner-image-container">
+            <div class="on-image-controls">
+              <div class="delete-confirm">단어 삭제</div>
+              <span class="fa fa-arrows"></span>
+            
+              <span class="fa fa-times" data-toggle="tooltip" data-placement="top" title="단어삭제"></span>
+            </div>
+            <div class="center-container">
+              <img src="season.jpg">
+            </div>
+          </div>
+        </div>
+        <div class="image-container">
+          <div class="inner-image-container">
+            <div class="on-image-controls">
+              <div class="delete-confirm">단어 삭제</div>
+              <span class="fa fa-arrows"></span>
+            
+              <span class="fa fa-times" data-toggle="tooltip" data-placement="top" title="단어삭제"></span>
+            </div>
+            <div class="center-container">
+              <img src="spring.jpg">
+            </div>
+          </div>
+        </div>
+        <div class="image-container">
+          <div class="inner-image-container">
+            <div class="on-image-controls">
+              <div class="delete-confirm">단어 삭제</div>
+              <span class="fa fa-arrows"></span>
+           
+              <span class="fa fa-times" data-toggle="tooltip" data-placement="top" title="단어삭제"></span>
+            </div>
+            <div class="center-container">
+              <img src="summer.jpg">
+            </div>
+          </div>
+        </div>
+        <div class="image-container">
+          <div class="inner-image-container">
+            <div class="on-image-controls">
+              <div class="delete-confirm">단어 삭제</div>
+              <span class="fa fa-arrows"></span>
+
+              <span class="fa fa-times" data-toggle="tooltip" data-placement="top" title="단어삭제"></span>
+            </div>
+            <div class="center-container">
+              <img src="thanks.jpg">
+            </div>
+          </div>
+        </div>
+        <div class="image-container">
+          <div class="inner-image-container">
+            <div class="on-image-controls">
+              <div class="delete-confirm">단어 삭제</div>
+              <span class="fa fa-arrows"></span>
+             
+              <span class="fa fa-times" data-toggle="tooltip" data-placement="top" title="단어삭제"></span>
+            </div>
+            <div class="center-container">
+              <img src="winter.jpg">
+            </div>
+          </div>
+        </div>
+        <div class="image-container">
+          <div class="inner-image-container">
+            <div class="on-image-controls">
+              <div class="delete-confirm">단어 삭제</div>
+              <span class="fa fa-arrows"></span>
+             
+              <span class="fa fa-times" data-toggle="tooltip" data-placement="top" title="단어삭제"></span>
+            </div>
+            <div class="center-container">
+              <img src="parent.jpg">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="file-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Details for image</h4>
+      </div>
+      <div class="modal-body">
+        <div id="image-preview-modal"></div>
+        <div class="row image-data-row">
+          <div class="col-sm-4 static-data">
+
+          </div>
+      
+            <div class="text-right">
+              <a href="" target="blank" id="full-image-link">Preview on new tab</a> | <a href="#" class="text-danger" id="delete-image">단어 삭제하기</a>
+            </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
