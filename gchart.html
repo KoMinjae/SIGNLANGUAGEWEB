@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ["Element", "Density", { role: "style" } ],
+          ["수어", 8.35, "#FF0000"],
+          ["구어", 3.65, "#D8F6CE"],
+          ["필담", 6.75, "#A9E2F3"],
+          ["몸짓", 6.38, "#F8E0F1"]
+        ]);
+        var view = new google.visualization.DataView(data);
+        view.setColumns([0, 1,
+                         { calc: "stringify",
+                           sourceColumn: 1,
+                           type: "string",
+                           role: "annotation" },
+                         2]);
+  
+        var options = {
+          title: "청각장애인-주로 사용하는 의사소통 방법(중복)",
+          width: 600,
+          height: 400,
+          bar: {groupWidth: "20%"},
+          legend: { position: "none" },
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+        chart.draw(view, options);
+    }
+    </script>
+  <div id="columnchart_values" style="width: 900px; height: 300px;"></div>
+</head>
