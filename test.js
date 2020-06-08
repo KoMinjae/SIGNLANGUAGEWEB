@@ -3,6 +3,7 @@ var express    =  require("express");
 var mysql      = require('mysql');
 var ejs = require('ejs');
 var bodyParser = require('body-parser');
+
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
@@ -28,15 +29,15 @@ if(!err) {
     console.log("Error connecting database ... \n\n");
 }
 });
-app.post('/search', function(req,res){
+//단어검색에 사용
+app.post('/search1', function(req,res){
   var body = req.body;
   connection.query('SELECT * from signlanguage where title = ?',[body.test1], function(err, rows, fields) {
-  connection.end();
   if (!err){
     var page = ejs.render(test,{
-      title : "good",
-      data : rows,
-    });
+    title : "good",
+    data : rows,
+  });
     res.send(page);
     console.log('The solution is: ', rows);
   }
@@ -44,20 +45,29 @@ app.post('/search', function(req,res){
     console.log('Error while performing Query.');
   });
 });
-app.get("/getdata?",function(req,res){
-  connection.query('SELECT * from signlanguage limit 2', function(err, rows, fields) {
-  connection.end();
-  if (!err){
-    var page = ejs.render(test,{
-      title : "good",
-      data : rows,
-    });
-    res.send(page);
-    console.log('The solution is: ', rows);
-  }
-  else
-    console.log('Error while performing Query.');
-  });
-});
+//문장검색에 사용
+app.post('/search2', function(req,res){
+  var body = req.body;
+var mod = require('korean-text-analytics');
+var task = new mod.TaskQueue();
+mod.ExecuteMorphModule("안녕하세요 만나서 반갑습니다.", function(err, rep){
+  console.log(err, rep);
+  console.log(err, rep['morphed']);
 
+  console.log("test:",rep['morphed'][0]['word']);
+
+  connection.query('SELECT * from signlanguage where title = ?',[rep['morphed'][0]['word']], function(err, rows, fields) {
+    if (!err){
+      var page = ejs.render(test,{
+      title : "good",
+      data : rows,
+      });
+      res.send(page);
+      console.log('The solution is: ', rows);
+      }
+      else
+        console.log('Error while performing Query.');
+      });
+  });
+});
 app.listen(3000);
