@@ -13,36 +13,62 @@
 
  <body>
    <header>
-         <nav class="navbar navbar-expand-sm navbar-light">
-         <nav class="navbar-brand">SIGN LANGUAGE</nav>
+
+         <a class="navbar-brand" href="Main.html">SIGN LANGUAGE</a>
          <ul class="nav__links">
            <li><a href="#">공지사항</a></li>
            <li><a href="#">수화사전</a></li>
            <li><a href="#">마이페이지</a></li>
+           <a class="cta" href="#"><button>CONTACT</button></a>
+           <script>
+              //로그인 체크,,
+
+
+           </script>
+
          </ul>
-       </nav>
-       <a class="cta" href="#"><button>CONTACT</button></a>
+
   </header>
+  <hr>
+  <div id="top">
+  <div id="login"><a class="gologin" href="Login.html">로그인하기</a></div>
+
   <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
-    <!-- Indicators -->
+    <p id="news">주요 뉴스</p>
+
+    <nav class="navbar navbar-expand-sm navbar-light">
     <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#myCarousel" data-slide-to="1"></li>
       <li data-target="#myCarousel" data-slide-to="2"></li>
     </ol>
 
-    <!-- 뉴스 크롤링 가능하면,,, -->
+<!-- 뉴스 크롤링 가능하면,,, -->
     <div class="carousel-inner">
       <div class="item active">
-      <h4><img src="images/logo.png"></span></h4>
+      <h4><img src="image/blue.jpg" hegith="300" width="300"></span></h4>
       </div>
       <div class="item">
-        <h4><img src="images/logo.png"></span></h4>
+        <h4><img src="image/pink.jpg" hegith="300" width="300"></span></h4>
       </div>
       <div class="item">
-        <h4><img src="images/logo.png"></span></h4>
+        <h4><img src="image/yellow.jpg" hegith="300" width="300"></span></h4>
       </div>
     </div>
+    <hr>
+
+     </nav>
+
+  </div>
+
+
+</div>
+<div id="footer">
+<input type="text" placeholder="사이트 이동"/>
+<input type="button" value=이동 onclick="movesite"/>
+
+
+</div>
 
     <!-- Left and right controls -->
 </body>
