@@ -5,38 +5,30 @@
     <title>
       <%= title %>
     </title>
-    <script language = "javascript">
-        function output(form) {
-          for(var i = 0; i < form.SearchCondition.length; i++) {
-              if(form.SearchCondition[i].checked) {
-                var SearchCondition = form.SearchCondition[i].value;
-                if (SearchCondition =="단어"){
-                  form.action.value="/search1";
-                }
-                else if (SearchCondition == "문장"){
-                  form.action="/search2";
+    <script>
+        function postid(clicked_id){
+         var form = document.createElement("form");
+         form.setAttribute("method", "post");
+         form.setAttribute("action","/adddir1");
+         document.body.appendChild(form);
 
-                }
-            }
-          }
+         var insert = document.createElement('input');
+         insert.setAttribute("type","hidden");
+         insert.setAttribute("name","test2");
+         insert.setAttribute("value",clicked_id);
+         form.appendChild(insert);
+         form.submit();
         }
-        function AddDir() {
-
-        }
-
     </script>
   </head>
   <body>
     <form name="search_form" action="/search1" method="post">
-      <input type="radio" name="SearchCondition" checked="checked" value="단어"/>단어
-      <input type="radio" name="SearchCondition" value="문장"/>문장
       <input type="text" name="test1"/>
-      <button type="submit" value=OK onclick="output(this.form)">OK</button><br>
-
+      <button type="submit" value=OK>OK</button><br>
       <br>
     </form>
     <br>
-    <form class="" action="index.html" method="post">
+    <form>
     <% if(locals.data){%>
       <table border=1px solid black>
         <tr>
@@ -52,7 +44,7 @@
             <td><%=data[i].des%></td>
             <td><video src=<%=data[i].video%> autoplay="autoplay"></video></td>
             <td><img src=<%=data[i].img%>></img></td>
-            <td><button type="button" name="button" onclick="AddDir()">추가</button></td>
+            <td><input type="button" class="tdclass" id=<%=data[i].slid%> onclick="postid(this.id)">추가</input></td>
           </tr>
           <%}%>
         <%}%>
