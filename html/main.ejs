@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <title>Main</title>
+ </head>
+
+ <body>
+   <header>
+  </header>
+  <p>Main Test </p>
+  <body>
+    <form class="login-form", action="/signup1", method="post">
+        <input type="text" name="username" placeholder="Username"/>
+        <input type="text" name="password"  placeholder="Password"/>
+        <button type="submit" value=OK>OK</button>
+</form>
+    <form class="login-form", action="/login1", method="post">
+            <input type="text" name="username" placeholder="Username"/>
+            <input type="text" name="password"  placeholder="Password"/>
+            <button type="submit" value=OK>OK</button>
+</form>
+<body>
+    <form class="login-form", action="/logout", method="get">
+            <button type="submit" value=OK>OK</button>
+    </form>
+    <button onclick="movepage()">Move</button>
+
+    <script>
+      function movepage(){
+        location.href = "/searchpage";
+      }
+    </script>
+</body>
+</html>
