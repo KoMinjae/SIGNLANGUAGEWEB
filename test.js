@@ -31,7 +31,7 @@ app.use(session({
   store: sessionStore
 }));
 var test = fs.readFileSync('./html/searchpage.ejs', 'utf8');
-var tests = fs.readFileSync('./html/tests.ejs', 'utf8');
+var mydir = fs.readFileSync('./html/mydir.ejs', 'utf8');
 var login = fs.readFileSync('./html/login.html', 'utf8');
 var main = fs.readFileSync('./html/main.ejs', 'utf8');
 var loginusername="";
@@ -47,6 +47,18 @@ app.get('/searchpage', function (req, res) {
     title: "search page",
   });
   res.send(page);
+});
+app.get('/mydir',function(req,res){connection.query('SELECT img from signlanguage as A LEFT JOIN dir as B on A.slid = B.slid where userid = ?', [loginusername], function (err, rows, fields) {
+    if (!err){
+      var page = ejs.render(test, {
+        title: "good",
+        data: rows,
+      });
+      res.send(page);
+    }
+    else
+      console.log('Error while performing Query.');
+  });
 });
 connection.connect(function (err) {
   if (!err) {
@@ -80,7 +92,7 @@ app.post('/adddir1', function (req, res) {
   connection.query('INSERT INTO dir(userid,slid) values(?,?)', [loginusername, body.test2], function (err, rows, fields) {
     connection.query('SELECT img from signlanguage as A LEFT JOIN dir as B on A.slid = B.slid where userid = ?', [loginusername], function (err, row, fields) {
       if (!err) {
-        var page = ejs.render(tests, {
+        var page = ejs.render(mydir, {
           title: "good",
           data: row,
         });

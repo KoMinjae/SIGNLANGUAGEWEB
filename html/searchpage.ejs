@@ -27,6 +27,15 @@
       <button type="submit" value=OK>OK</button><br>
       <br>
     </form>
+    <form class="login-form", action="/logout", method="get">
+      <button type="submit" value=OK>OK</button>
+    </form>
+      <button onclick="movepage()">Move</button>
+    <script>
+      function movepage(){
+        location.href = "/mydir";
+      }
+    </script>
     <br>
     <form>
     <% if(locals.data){%>
