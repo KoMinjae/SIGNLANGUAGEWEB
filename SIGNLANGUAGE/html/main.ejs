@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+ <html lang="en">
+
+ <head>
+  <link rel="stylesheet" type='text/css' href="css/main.css">
+  <link rel='stylesheet' type='text/css' href='vendor/bootstrap/css/bootstrap.min.css'>
+  
+   <title>수어 학습 사이트</title>
+ </head>
+
+ <body>
+ <!--메뉴 main-tabs -->
+ <section class="main-tabs">
+  <h1>수어 학습 사이트</h1>
+  <h3>나만의 단어장으로 원하는 수어들을 학습해보세요!</h3>
+  <div class="menu-tabs-container">
+  <a class="menu-tabs" onclick="movepage()">검색</a>
+  <a class="menu-tabs" href="">단어장</a>
+  <a class="menu-tabs" href="">회원가입</a>
+  <a class="menu-tabs" href="">로그인</a>
+  <span calss="tab-slider"></span>
+  </div>
+  </section>
+    <form class="login-form", action="/signup1", method="post">
+        <input type="text" name="username" placeholder="Username"/>
+        <input type="text" name="password"  placeholder="Password"/>
+        <button type="submit" value=OK>OK</button>
+</form>
+    <form class="login-form", action="/login1", method="post">
+            <input type="text" name="username" placeholder="Username"/>
+            <input type="text" name="password"  placeholder="Password"/>
+            <button type="submit" value=OK>OK</button>
+</form>
+<body>
+    <form class="login-form", action="/logout", method="get">
+            <button type="submit" value=OK>OK</button>
+    </form>
+    <button onclick="movepage()">Move</button>
+
+    <script>
+      function movepage(){
+        location.href = "/searchpage";
+      }
+    </script>
+</body>
+</html>
