@@ -35,20 +35,30 @@ var mydir = fs.readFileSync('./html/mydir.ejs', 'utf8');
 var login = fs.readFileSync('./html/login.html', 'utf8');
 var main = fs.readFileSync('./html/main.ejs', 'utf8');
 var loginusername = "";
+var checksession ="";          //로그인 세션 변수
 var lastsearch = new Array();  //최근검색어 저장 리스트
 //첫화면 설정
 app.get('/', (req, res) => {
+  if(req.session.id==checksession){   //현재세션과 로그인 세션값이 같으면
+    console.log("test1",req.session.id, checksession);
   var page = ejs.render(main, {
-    title: "Test",
+    title: loginusername+"님의 메인화면",
+    text : loginusername+"님 환영합니다",
     data2 : lastsearch,
   });
+}else{
+  console.log("test2",req.session.id, checksession);
+  var page = ejs.render(main, {
+    title: "메인",
+    data2 : lastsearch,
+  });
+  }
   res.send(page);
-})
+});
 app.get('/searchpage', function (req, res) {
   var page = ejs.render(test, {
-    title: "search page",
+    title: "검색창",
     data2 : lastsearch,
-
   });
   res.send(page);
 });
@@ -58,7 +68,7 @@ app.get('/mydir', function (req, res) {
     connection.query('SELECT A.slid as slid, title, img from signlanguage as A LEFT JOIN dir as B on A.slid = B.slid where userid = ?', [loginusername], function (err, rows, fields) {
       if (!err) {
         var page = ejs.render(mydir, {
-          title: "good",
+          title: "사전",
           data: rows,
           data2 : lastsearch,
 
@@ -70,7 +80,7 @@ app.get('/mydir', function (req, res) {
     });
   } else {
     var page = ejs.render(mydir, {
-      title: "good",
+      title: "사전",
       text: "로그인이 필요합니다.",
       data2 : lastsearch,
 
@@ -100,7 +110,7 @@ app.post('/search1', function (req, res) {
   connection.query('SELECT * from signlanguage where title LIKE ?', '%' + [body.test1] + '%', function (err, rows, fields) {
     if (!err) {
       var page = ejs.render(test, {
-        title: "good",
+        title: "검색창",
         data: rows,
         data2 : lastsearch,
 
@@ -120,7 +130,7 @@ app.post('/adddir1', function (req, res) {
     connection.query('SELECT A.slid as slid, title, img from signlanguage as A LEFT JOIN dir as B on A.slid = B.slid where userid = ?', [loginusername], function (err, row, fields) {
       if (!err) {
         var page = ejs.render(mydir, {
-          title: "good",
+          title: "사전",
           data: row,
           data2 : lastsearch,
 
@@ -170,22 +180,22 @@ app.post('/login1', function (req, res) {
   console.log("logintest");
   var body = req.body;
   loginusername = body.username;
-  console.log("test", loginusername);
   if (loginusername != "") {
     connection.query('select * from user where userid = ? and pw =?', [body.username, body.password], function (err, row, fields) {
       if (!err) {
         req.session.id = req.body.username;
+        checksession = req.session.id;
         console.log("sign in test1", req.session.id);
         req.session.save(function () {
           res.redirect('/');
         });
       }
-      else if (err) throw err;
+      else if (err) console.log("login error");
     });
   } else {
     var page = ejs.render(main, {
-      title: "Test",
-      text: "아이디와 비밀번호를 입력해주세요",
+      title: "메인",
+      text1: "아이디와 비밀번호를 입력해주세요",
       data2 : lastsearch,
     });
     res.send(page);

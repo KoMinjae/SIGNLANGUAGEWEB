@@ -1,7 +1,7 @@
 <!DOCTYPE html>
  <html lang="en">
  <head>
-   <title>Main</title>
+   <title><%=title%></title>
  </head>
 
  <body>
@@ -14,11 +14,17 @@
         <input type="text" name="password"  placeholder="Password"/>
         <button type="submit" value=OK>회원가입</button>
 </form>
+<!---로그인 확인 기능--->
+<%if(locals.text){%>
+  <%=locals.text%>
+  <%}else{%>
     <form class="login-form", action="/login1", method="post">
             <input type="text" name="username" placeholder="Username"/>
             <input type="text" name="password"  placeholder="Password"/>
             <button type="submit" value=OK>로그인</button>
-</form>
+    </form>
+    <%}%>
+  
 <body>
     <form class="login-form", action="/logout", method="get">
             <button type="submit" value=OK>로그아웃</button>
@@ -37,5 +43,10 @@
     <p>2 = <%=locals.data2[1]%></p>
     <p>3 = <%=locals.data2[2]%></p>
   </form>
+  <%if(locals.text1){%>
+  <script>
+    alert(locals.text1)
+  </script>
+  <%}%>
 </body>
 </html>
