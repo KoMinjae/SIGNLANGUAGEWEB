@@ -34,31 +34,50 @@ var test = fs.readFileSync('./html/searchpage.ejs', 'utf8');
 var mydir = fs.readFileSync('./html/mydir.ejs', 'utf8');
 var login = fs.readFileSync('./html/login.html', 'utf8');
 var main = fs.readFileSync('./html/main.ejs', 'utf8');
-var loginusername="";
+var loginusername = "";
+var lastsearch = new Array();  //최근검색어 저장 리스트
 //첫화면 설정
 app.get('/', (req, res) => {
   var page = ejs.render(main, {
     title: "Test",
+    data2 : lastsearch,
   });
   res.send(page);
 })
 app.get('/searchpage', function (req, res) {
   var page = ejs.render(test, {
     title: "search page",
+    data2 : lastsearch,
+
   });
   res.send(page);
 });
-app.get('/mydir',function(req,res){connection.query('SELECT img from signlanguage as A LEFT JOIN dir as B on A.slid = B.slid where userid = ?', [loginusername], function (err, rows, fields) {
-    if (!err){
-      var page = ejs.render(test, {
-        title: "good",
-        data: rows,
-      });
-      res.send(page);
-    }
-    else
-      console.log('Error while performing Query.');
-  });
+app.get('/mydir', function (req, res) {
+  console.log("userid", loginusername);
+  if (loginusername != "") {      //사전접근에 로그인 필수로 설정
+    connection.query('SELECT A.slid as slid, title, img from signlanguage as A LEFT JOIN dir as B on A.slid = B.slid where userid = ?', [loginusername], function (err, rows, fields) {
+      if (!err) {
+        var page = ejs.render(mydir, {
+          title: "good",
+          data: rows,
+          data2 : lastsearch,
+
+        });
+        res.send(page);
+      }
+      else
+        console.log('Error while performing Query.');
+    });
+  } else {
+    var page = ejs.render(mydir, {
+      title: "good",
+      text: "로그인이 필요합니다.",
+      data2 : lastsearch,
+
+    });
+    res.send(page);
+  };
+
 });
 connection.connect(function (err) {
   if (!err) {
@@ -72,11 +91,19 @@ app.post('/search1', function (req, res) {
   console.log("test2");
 
   var body = req.body;
+  if(lastsearch.length==3){   //최대 검색어 저장수는 3개
+    lastsearch.shift()
+    lastsearch.push(body.test1)
+  }else
+    lastsearch.push(body.test1)
+  console.log(lastsearch);
   connection.query('SELECT * from signlanguage where title LIKE ?', '%' + [body.test1] + '%', function (err, rows, fields) {
     if (!err) {
       var page = ejs.render(test, {
         title: "good",
         data: rows,
+        data2 : lastsearch,
+
       });
       res.send(page);
       console.log('The solution is: ', rows);
@@ -90,11 +117,13 @@ app.post('/adddir1', function (req, res) {
   var body = req.body;
   console.log('addtest', req.session.id, body.test2);
   connection.query('INSERT INTO dir(userid,slid) values(?,?)', [loginusername, body.test2], function (err, rows, fields) {
-    connection.query('SELECT img from signlanguage as A LEFT JOIN dir as B on A.slid = B.slid where userid = ?', [loginusername], function (err, row, fields) {
+    connection.query('SELECT A.slid as slid, title, img from signlanguage as A LEFT JOIN dir as B on A.slid = B.slid where userid = ?', [loginusername], function (err, row, fields) {
       if (!err) {
         var page = ejs.render(mydir, {
           title: "good",
           data: row,
+          data2 : lastsearch,
+
         });
         res.send(page);
         console.log('The solution issss: ', rows);
@@ -106,6 +135,20 @@ app.post('/adddir1', function (req, res) {
     });
   });
 });
+//단어삭제 테스트
+app.post('/deletedir', function (req, res) {
+  var body = req.body;
+  console.log('deletetest', body.test3);
+  connection.query('delete from dir where userid=? and slid =?', [loginusername, body.test3], function (err, rows, fields) {
+    if (!err) {
+      res.redirect('/mydir');
+    }
+      else {
+      console.log('Error while performing Query.');
+    }
+  });
+});
+
 //회원가입 테스트
 
 app.post('/signup1', function (req, res) {
@@ -127,24 +170,36 @@ app.post('/login1', function (req, res) {
   console.log("logintest");
   var body = req.body;
   loginusername = body.username;
-  connection.query('select * from user where userid = ? and pw =?', [body.username, body.password], function (err, row, fields) {
-    if (!err) {
-      req.session.id = req.body.username;
-      console.log("sign in test1", req.session.id);
-      req.session.save(function () {
-        res.redirect('/');
-      });
-    }
-    else if (err) throw err;
-  });
+  console.log("test", loginusername);
+  if (loginusername != "") {
+    connection.query('select * from user where userid = ? and pw =?', [body.username, body.password], function (err, row, fields) {
+      if (!err) {
+        req.session.id = req.body.username;
+        console.log("sign in test1", req.session.id);
+        req.session.save(function () {
+          res.redirect('/');
+        });
+      }
+      else if (err) throw err;
+    });
+  } else {
+    var page = ejs.render(main, {
+      title: "Test",
+      text: "아이디와 비밀번호를 입력해주세요",
+      data2 : lastsearch,
+    });
+    res.send(page);
+  }
 });
+
 app.get('/logout', function (req, res) {
-  delete req.session.id;
-  console.log("test12",req.session.id);
-  loginusername="";
-  req.session.save(function () {
-    res.redirect('/');
-  });
+  console.log("로그아웃")
+  loginusername = "";
+  req.session.destroy(
+    function (err) {
+      res.redirect('/');
+    });
+
 });
 //문장검색에 사용
 /*

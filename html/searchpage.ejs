@@ -24,13 +24,13 @@
   <body>
     <form name="search_form" action="/search1" method="post">
       <input type="text" name="test1"/>
-      <button type="submit" value=OK>OK</button><br>
+      <button type="submit" value=OK>검색</button><br>
       <br>
     </form>
     <form class="login-form", action="/logout", method="get">
-      <button type="submit" value=OK>OK</button>
+      <button type="submit" value=OK>로그아웃</button>
     </form>
-      <button onclick="movepage()">Move</button>
+      <button onclick="movepage()">사전으로</button>
     <script>
       function movepage(){
         location.href = "/mydir";
@@ -53,13 +53,18 @@
             <td><%=data[i].des%></td>
             <td><video src=<%=data[i].video%> autoplay="autoplay"></video></td>
             <td><img src=<%=data[i].img%>></img></td>
-            <td><input type="button" class="tdclass" id=<%=data[i].slid%> onclick="postid(this.id)">추가</input></td>
+            <td><input type="button" class="tdclass" id=<%=data[i].slid%> value="추가" onclick="postid(this.id)"></input></td>
           </tr>
           <%}%>
         <%}%>
       </table>
     </form>
-
+    <form>
+      <%if(locals.data2)%>
+      <p>1 = <%=locals.data2[0]%></p>
+      <p>2 = <%=locals.data2[1]%></p>
+      <p>3 = <%=locals.data2[2]%></p>
+    </form>
   </body>
 
 </html>

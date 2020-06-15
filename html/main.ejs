@@ -12,23 +12,30 @@
     <form class="login-form", action="/signup1", method="post">
         <input type="text" name="username" placeholder="Username"/>
         <input type="text" name="password"  placeholder="Password"/>
-        <button type="submit" value=OK>OK</button>
+        <button type="submit" value=OK>회원가입</button>
 </form>
     <form class="login-form", action="/login1", method="post">
             <input type="text" name="username" placeholder="Username"/>
             <input type="text" name="password"  placeholder="Password"/>
-            <button type="submit" value=OK>OK</button>
+            <button type="submit" value=OK>로그인</button>
 </form>
 <body>
     <form class="login-form", action="/logout", method="get">
-            <button type="submit" value=OK>OK</button>
+            <button type="submit" value=OK>로그아웃</button>
     </form>
-    <button onclick="movepage()">Move</button>
+    <button onclick="movepage()">검색페이지</button>
 
     <script>
       function movepage(){
         location.href = "/searchpage";
       }
     </script>
+  <form>
+    <!---최근검색어 출력--->
+    <%if(locals.data2)%>
+    <p>1 = <%=locals.data2[0]%></p>
+    <p>2 = <%=locals.data2[1]%></p>
+    <p>3 = <%=locals.data2[2]%></p>
+  </form>
 </body>
 </html>
