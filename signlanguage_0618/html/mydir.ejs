@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>
+      <%= title %>
+    </title>
+  </head>
+  <body>
+    <script>
+      function postid(clicked_id){
+       var form = document.createElement("form");
+       form.setAttribute("method", "post");
+       form.setAttribute("action","/deletedir");
+       document.body.appendChild(form);
+
+       var insert = document.createElement('input');
+       insert.setAttribute("type","hidden");
+       insert.setAttribute("name","test3");
+       insert.setAttribute("value",clicked_id);
+       form.appendChild(insert);
+       form.submit();
+      }
+  </script>
+  <button onclick="movepage()">검색으로</button>
+    <script>
+      function movepage(){
+        location.href = "/searchpage";
+      }
+    </script>
+    <form>
+    <% if(locals.data){%>
+      <table border=1px solid black>
+        <tr>
+          <td>이름</td>
+          <td>이미지</td>
+          <td>삭제버튼</td>
+        </tr>
+        <% for(let i = 0; i<data.length; i++){%>
+          <tr>
+            <td><%=data[i].title%></td>
+            <td><img src=<%=data[i].img%>></img></td>
+            <td><input type="button" class="tdclass" id=<%=data[i].slid%> value="삭제" onclick="postid(this.id)"></input></td>
+          </tr>
+          <%}%>
+        <%}%>
+      </table>
+      <% if(locals.text){%>
+        <p><%=locals.text%></p>
+      <%}%>
+
+    </form>
+    <form>
+      <%if(locals.data2)%>
+      <p>1 = <%=locals.data2[0]%></p>
+      <p>2 = <%=locals.data2[1]%></p>
+      <p>3 = <%=locals.data2[2]%></p>
+    </form>
+  </body>
+
+</html>

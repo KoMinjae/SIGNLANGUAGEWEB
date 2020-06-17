@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+  <link rel="stylesheet" type='text/css' href="css/main.css" type="text/css">
+  <link rel='stylesheet' type='text/css' href='vendor/bootstrap/css/bootstrap.min.css'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+  <title>수어 학습 사이트</title>
+ </head>
+
+ <body>
+   <header>
+  </header>
+   <!--메뉴 main-tabs -->
+ <section class="main-tabs">
+  <h1>수어 학습 사이트</h1>
+  <h3>나만의 단어장으로 원하는 수어들을 학습해보세요!</h3>
+  <div class="menu-tabs-container">
+  <a class="menu-tabs" onclick="movepage()">검색</a>
+  <a class="menu-tabs" onclick="movepage2()">나만의 단어장</a>
+  <a class="menu-tabs" href="">회원가입</a>
+  <a class="menu-tabs" href="">로그인</a>
+  <a class="menu-tabs" href="">더 알아보기</a>
+  <span calss="tab-slider"></span>
+  </div>
+  </section>
+  <!-------------------------------------------->
+    <form class="login-form", action="/signup1", method="post">
+        <input type="text" name="username" placeholder="Username"/>
+        <input type="text" name="password"  placeholder="Password"/>
+        <button type="submit" value=OK>회원가입</button>
+</form>
+
+<!---로그인 확인 기능(로그인,회원가입폼)--->
+<%if(locals.text){%>
+  <%=locals.text%>
+  <%}else{%>
+    <form class="login-form", action="/login1", method="post">
+            <input type="text" name="username" placeholder="Username"/>
+            <input type="text" name="password"  placeholder="Password"/>
+            <button type="submit" value="OK">로그인</button>
+    </form>
+    <%}%>
+    <form class="login-form", action="/logout", method="get">
+            <button type="submit" value=OK>로그아웃</button>
+    </form>
+  
+    <script>
+      function movepage(){
+        location.href = "/searchpage";
+      }
+
+      function movepage2(){
+        location.href = "/mydir";
+      }
+    </script>
+  <form>
+
+  <!----------------------이미지 슬라이드 :오늘의 수어단어----------------------->
+<img src="word1.png" id="mainImage"alt="오늘의단어1" style="width:70%;height:300px;">
+
+    <!---최근검색어 출력------------------------------------------>
+    <%if(locals.data2)%>
+    <p>1 = <%=locals.data2[0]%></p>
+    <p>2 = <%=locals.data2[1]%></p>
+    <p>3 = <%=locals.data2[2]%></p>
+  </form>
+  <%if(locals.text1){%>
+  <script>
+    alert(locals.text1)
+  </script>
+  <%}%>
+
+  <!----------------플로팅:최근 검색한 단어---------------------------->
+
+  <!----------------구글맵 출력---------------------------------------->
+  <div id="map" style="width:500px; height: 400px"></div>
+<script>
+function myMap() {  
+  var mapCanvas = document.getElementById("map");
+  var sign = new google.maps.LatLng(37.579233, 126.813748);
+
+  var mapOptions = {
+  	center:sign, 
+    zoom: 18
+  };
+  var map = new google.maps.Map(mapCanvas, mapOptions);
+  
+  var marker = new google.maps.Marker({
+	position:sign,
+  animation:google.maps.Animation.BOUNCE,
+	icon: 'point.png'	
+  });
+  marker.setMap(map);
+
+  var infowindow = new google.maps.InfoWindow({
+    content: "국립국어원: 서울특별시 강서구 방화3동 827"
+  });
+  infowindow.open(map,marker);
+}
+//이미지 슬라이드 스크립트 
+
+var myImage=document.getElementById("mainImage");
+var imageArray=["word1.png","word2.png","word3.png"];
+var imageIndex=0;
+
+function changeImage(){
+
+myImage.setAttribute("src",imageArray[imageIndex]);
+imageIndex++;
+if(imageIndex>=imageArray.length){
+  imageIndex=0;
+}
+}
+setInterval(changeImage,3000);
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfgakhKeLvDJdWLNdPbMlW6TGw0392K8k&callback=myMap"></script>
+</body>
+</html>
