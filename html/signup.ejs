@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Signup</title>
+  <link rel="stylesheet" type="text/css" href="css/signup.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="Sign">
+      <h2>수어 학습 사이트</h2>
+      <p class="c" onclick="movemain()">메인 페이지로</p>
+    </div>
+
+    <div class="box">
+      <p class="title">회원가입</p>
+      <hr>
+      <form class="login-form" , action="/signup1", method="post">
+        <input type="text" name="username" placeholder="이름" />
+        <input type="text" name="userID" placeholder="아이디" />
+        <!--<button type="submit" id="check" value=idcheck, action="/idcheck", method="post">중복</br>확인</button>-->
+        <input type="password" name="password" placeholder="비밀번호" />
+        <input type="password" id="password_check" placeholder="비밀번호 확인" />
+        <button type="submit" id="asdf" value=SIGNUP onclick="check()">가입하기</button>
+      </form>
+    </div>
+  </div>
+        <script>
+        function movemain(){
+          location.href = "/";
+        }
+          function check() {
+            var name = document.getElementsByName("username")[0].value;
+            var id = document.getElementsByName("userID")[0].value;
+            var pw = document.getElementsByName("password")[0].value;
+            var pw_ck = document.getElementById("password_check").value;
+
+            if(name==''||name ==null){
+              alert("이름을 입력해주세요.");
+              return false;
+            }
+            if (id == '' || id == null) {
+              alert("아이디를 입력해주세요.");
+              return false;
+            }
+            if (pw == '' || id == null) {
+              alert("비밀번호를 입력해주세요.");
+              return false;
+            }
+            if (pw_ck == '' || pw_ck == null || pw_ck != pw) {
+              alert("비밀번호를 확인해주세요.");
+              return false;
+            }
+            alert("회원가입에 성공했습니다!");
+            movemain();
+          }
+
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      <%= title %>
+    </title>
+  </head>
+  <body>
+    <form>
+    <% if(locals.data){%>
+      <table border=1px solid black>
+        <tr>
+          <td>Title</td>
+          <td>설명</td>
+          <td>영상</td>
+          <td>이미지</td>
+          <td>단어장 추가</td>
+        </tr>
+        <% for(let i = 0; i<data.length; i++){%>
+          <tr>
+            <td><%=data[i].title%></td>
+            <td><%=data[i].des%></td>
+            <td><video src=<%=data[i].video%> autoplay="autoplay"></video></td>
+            <td><img src=<%=data[i].img%>></img></td>
+            <td><input type="button" class="tdclass" id=<%=data[i].slid%> onclick="postid(this.id)">추가</input></td>
+          </tr>
+          <%}%>
+        <%}%>
+      </table>
+    </form>
+
+  </body>
+
+</html>

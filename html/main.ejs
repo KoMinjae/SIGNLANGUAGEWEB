@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+ <html lang="en">
+
+ <head>
+  <link rel="stylesheet" type='text/css' href="css/main.css">
+  <link rel='stylesheet' type='text/css' href='vendor/bootstrap/css/bootstrap.min.css'>
+
+   <title>수어 학습 사이트</title>
+ </head>
+
+ <body>
+ <!--메뉴 main-tabs -->
+ <section class="main-tabs">
+  <h1>수어 학습 사이트</h1>
+  <h3>나만의 단어장으로 원하는 수어들을 학습해보세요!</h3>
+  <div class="menu-tabs-container">
+  <a class="menu-tabs" onclick="movepage()">검색</a>
+  <a class="menu-tabs" href="">단어장</a>
+  <a class="menu-tabs" onclick="movesignup()">회원가입</a>
+  <a class="menu-tabs" onclick="movelogin()">로그인</a>
+  <span calss="tab-slider"></span>
+  </div>
+  </section>
+
+<body>
+    <form class="login-form", action="/logout", method="get">
+            <button type="submit" value=OK>OK</button>
+    </form>
+    <button onclick="movepage()">Move</button>
+
+
+  <div id="footer">
+    <select name="site">
+    <option value="">---사이트 선택---</option>
+    <option value="http://slitt.deafkorea.com/">한국농아인협회</option>
+
+
+
+
+</select>
+  <input type="button" value=이동 onclick="movesite"/>
+  </div>
+
+    <script>
+      function movepage(){
+        location.href = "/searchpage";
+      }
+      function movelogin(){
+        location.href="/login";
+      }
+      function movesignup(){
+        location.href="/signup";
+      }
+    </script>
+</body>
+</html>
