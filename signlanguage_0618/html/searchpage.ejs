@@ -31,8 +31,14 @@
     <!------------로그아웃, 단어장---------------------->
    <div class="menu-tabs-container">
 
-      <form class="login-form", action="/logout", method="get">
-      <a class="menu-tabs" type="submit" value=OK>로그아웃</a>
+      <%if(locals.text){%>
+  <%=locals.text%>
+  <%}else{%>
+    <%}%>
+    <form class="login-form", action="/logout", method="get">
+            <button class="menu-tabs" type="submit" value=OK>로그아웃</button>
+    </form>
+  
     </form>
       <a class="menu-tabs" onclick="movepage()">나만의 단어장</a>
    </div>

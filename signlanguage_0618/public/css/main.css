@@ -1,5 +1,6 @@
 /*main.css*/
-@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800');/*나눔고딕 import*/
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+body, table,td,th,input,form, div, p{ font-family: 'Nanum Barun Gothic'; }
 body{
     text-align: center;
     font-family : 'Nanum Gothic';

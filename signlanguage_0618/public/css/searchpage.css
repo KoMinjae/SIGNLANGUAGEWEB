@@ -1,10 +1,29 @@
-@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800');
-
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+body, table,td,th,input,form, div, p{ font-family: 'Nanum Barun Gothic'; }
 body{
     text-align: center;
     font-family : 'Nanum Gothic';
 	text-align : center;
     padding : 10px 0;
+    background: #eee;
+}
+/*로그아웃버튼 디자인 맞추기*/
+button{
+    background-color: white;
+    border:none;
+}
+/*사이트 제목*/
+h1 {
+    font-size: 2rem;
+    margin: 0;
+    letter-spacing: 1rem;
+    
+}
+/*사이트 부제목*/
+h3 {
+    font-size: 1rem;
+    letter-spacing: 0.3rem;
+    opacity: 0.6;
 }
 /*플로팅 메뉴*/
 .fixed{
@@ -48,8 +67,6 @@ a{
     height: 70px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     background: #fff;
-
-
 }
 .menu-tabs:hover{
     color:white;
@@ -99,6 +116,7 @@ input:hover,:focus{
     float:right;
     color:#ffffff
 }
+
 table{
 border:1px solid #575756; 
 border-radius:5px;

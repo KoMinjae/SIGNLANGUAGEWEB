@@ -1,3 +1,25 @@
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+body, table,td,th,input,form, div, p{ font-family: 'Nanum Barun Gothic'; }
+body{
+    text-align: center;
+    font-family : 'Nanum Barun Gothic';
+	text-align : center;
+    padding : 10px 0;
+    background: #eee;
+}
+/*사이트 제목*/
+h1 {
+    font-size: 2rem;
+    margin: 0;
+    letter-spacing: 1rem;
+    
+}
+/*사이트 부제목*/
+h3 {
+    font-size: 1rem;
+    letter-spacing: 0.3rem;
+    opacity: 0.6;
+}
 /*플로팅 메뉴*/
 .fixed{
     display: inline-block;
@@ -9,4 +31,49 @@
     background: #eee;
     border-radius: 15px;
     padding:10px;
+}
+/*타이틀*/
+.main-tabs
+{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #eee;
+		text-align: center;
+		padding: 20px;
+}
+.menu-tabs{
+    display: flex;
+    height:100%;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    color: #000;
+    letter-spacing: 0.1rem;
+		transition: all 0.5s ease;
+		font-size: 1.5rem;
+}
+a{
+    text-decoration: none;
+}
+.menu-tabs-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 70px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background: #fff;
+
+
+}
+.menu-tabs:hover{
+    color:white;
+    background: rgba(102,177,241,0.8);
+          transition: all 0.5s ease;
+    cursor: pointer;
+}
+/*검색으로 돌아가기*/
+button{
+    background-color: white;
+    border:none;
 }
