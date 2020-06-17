@@ -21,7 +21,17 @@ h3 {
     opacity: 0.6;
 }
 /*플로팅 메뉴*/
-
+.fixed{
+    display: inline-block;
+    position: fixed;
+    left:90%;
+    top: 250px;
+    width: 100px;
+    height: 170px;
+    background: #eee;
+    border-radius: 15px;
+    padding:10px;
+}
 /*메뉴탭*/
 .main-tabs
 .et-slide {

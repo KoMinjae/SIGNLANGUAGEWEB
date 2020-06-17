@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
   if(req.session.id==checksession){   //현재세션과 로그인 세션값이 같으면
     console.log("test1",req.session.id, checksession);
   var page = ejs.render(main, {
-    title: loginusername+"님의 메인화면",
+    title: loginusername+"님",
     text : loginusername+"님 환영합니다",
     data2 : lastsearch,
   });

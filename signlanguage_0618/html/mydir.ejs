@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" type='text/css' href="css/mydir.css" type="text/css">
+  <link rel='stylesheet' type='text/css' href='vendor/bootstrap/css/bootstrap.min.css'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
     <meta charset="utf-8">
-
     <title>
       <%= title %>
     </title>
@@ -51,12 +56,18 @@
       <%}%>
 
     </form>
-    <form>
+<div class="fixed">
+ <p >최근 검색한 단어</p>
       <%if(locals.data2)%>
       <p>1 = <%=locals.data2[0]%></p>
       <p>2 = <%=locals.data2[1]%></p>
       <p>3 = <%=locals.data2[2]%></p>
-    </form>
+      <%if(locals.text1){%>
+  <script>
+    alert(locals.text1)
+  </script>
+  <%}%>
+  </div>
   </body>
 
 </html>

@@ -1,0 +1,12 @@
+/*플로팅 메뉴*/
+.fixed{
+    display: inline-block;
+    position: fixed;
+    left:90%;
+    top: 250px;
+    width: 100px;
+    height: 170px;
+    background: #eee;
+    border-radius: 15px;
+    padding:10px;
+}
