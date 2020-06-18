@@ -136,7 +136,7 @@ app.post('/adddir1', function (req, res) {
     connection.query('SELECT A.slid as slid, title, img from signlanguage as A LEFT JOIN dir as B on A.slid = B.slid where userid = ?', [loginusername], function (err, row, fields) {
       if (!err) {
         var page = ejs.render(mydir, {
-          title: "사전",
+          title: "나만의 단어장",
           data: row,
           data2 : lastsearch,
 

@@ -5,7 +5,7 @@ body{
     font-family : 'Nanum Gothic';
 	text-align : center;
     padding : 10px 0;
-    background: #eee;
+
 }
 /*로그아웃버튼 디자인 맞추기*/
 button{
@@ -37,6 +37,7 @@ h3 {
     border-radius: 15px;
     padding:10px;
 }
+/*타이틀 ---------------------------------*/
 .main-tabs
 {
     flex-direction: column;
@@ -74,6 +75,7 @@ a{
           transition: all 0.5s ease;
     cursor: pointer;
 }
+/*------------검색창--------------------------*/
 input{
     height:20px ;
     width:70%;
@@ -116,15 +118,38 @@ input:hover,:focus{
     float:right;
     color:#ffffff
 }
-
+/*--------------표스타일-----------------------*/
 table{
 border:1px solid #575756; 
 border-radius:5px;
 text-align: center;
 border-collapse: collapse;
+padding:2px;
 }
-td,th{
+td,tr,th{
 border:1px solid #575756;
 padding:10px;
-
 }
+th{
+width:50px;
+}
+.td_title{
+
+    width:10%;
+}
+.td_content{
+   
+    width:15%;
+}
+.td_video{
+
+    width:35%;
+}
+.td_img{
+
+    width:30%;
+}
+.td_add{
+   width:10%;
+}
+

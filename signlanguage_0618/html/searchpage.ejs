@@ -62,20 +62,20 @@
 <br><br>
     <form>
     <% if(locals.data){%>
-      <table >
+      <table style="margin-left: 60px; margin-right: 160px;">
         <tr>
-          <td>Title</td>
-          <td>설명</td>
-          <td>영상</td>
-          <td>이미지</td>
-          <td>단어장 추가</td>
+          <td class="td_title" >용어</td>
+          <td class="td_content">한국어 정보</td>
+          <td class="td_video">영상</td>
+          <td class="td_img">수형사진</td>
+          <td class="td_add">단어장에 추가하기</td>
         </tr>
         <% for(let i = 0; i<data.length; i++){%>
           <tr>
             <td><%=data[i].title%></td>
             <td><%=data[i].des%></td>
-            <td><video src=<%=data[i].video%> autoplay="autoplay"></video></td>
-            <td><img src=<%=data[i].img%>></img></td>
+            <td><video width="400" height="400" src=<%=data[i].video%> autoplay="autoplay"></video></td>
+            <td><img width="200" height="200" src=<%=data[i].img%>></img></td>
             <td><input type="button" class= "add" class="tdclass" id=<%=data[i].slid%> value="추가" onclick="postid(this.id)"></input></td>
           </tr>
           <%}%>
@@ -85,9 +85,9 @@
  <div class="fixed">
  <p >최근 검색한 단어</p>
       <%if(locals.data2)%>
-      <p>1 = <%=locals.data2[0]%></p>
-      <p>2 = <%=locals.data2[1]%></p>
-      <p>3 = <%=locals.data2[2]%></p>
+      <p><%=locals.data2[0]%></p>
+      <p><%=locals.data2[1]%></p>
+      <p><%=locals.data2[2]%></p>
       <%if(locals.text1){%>
   <script>
     alert(locals.text1)
