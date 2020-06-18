@@ -20,12 +20,16 @@
 	    <div class="box">
 	      <p class="title">로그인</p>
 	      <hr>
+
+				<%if(locals.text){%>
+				  <%=locals.text%>
+				  <%}else{%>
 	      <form class="login-form" , action="/login1", method="post">
 	        <input type="text" name="userID" placeholder="아이디" />
-	        <!--<button type="submit" id="check" value=idcheck, action="/idcheck", method="post">중복</br>확인</button>-->
 	        <input type="password" name="password" placeholder="비밀번호" />
-	        <button type="submit" id="asdf" value=LOGIN onclick="check()">로그인</button>
+	        <button type="submit" id="asdf" value=LOGIN onclick="check();">로그인</button>
 	      </form>
+				<%}%>
 	    </div>
 	  </div>
 	        <script>
@@ -47,7 +51,6 @@
 	              alert("비밀번호를 입력해주세요.");
 	              return false;
 	            }
-	            movemain();
 	          }
 
 	        </script>
