@@ -1,11 +1,9 @@
-@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
-body, table,td,th,input,form, div, p{ font-family: 'Nanum Barun Gothic'; }
+/*단어장 css*/
 body{
     text-align: center;
     font-family : 'Nanum Barun Gothic';
 	text-align : center;
     padding : 10px 0;
-    background: #eee;
 }
 /*사이트 제목*/
 h1 {
@@ -20,14 +18,14 @@ h3 {
     letter-spacing: 0.3rem;
     opacity: 0.6;
 }
-/*플로팅 메뉴*/
+/*최근 검색한 단어*/
 .fixed{
     display: inline-block;
     position: fixed;
     left:90%;
     top: 250px;
     width: 100px;
-    height: 170px;
+    height: 200px;
     background: #eee;
     border-radius: 15px;
     padding:10px;
@@ -38,7 +36,7 @@ h3 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: #eee;
+    background-color: #eee;
 		text-align: center;
 		padding: 20px;
 }
@@ -51,7 +49,7 @@ h3 {
     color: #000;
     letter-spacing: 0.1rem;
 		transition: all 0.5s ease;
-		font-size: 1.5rem;
+		font-size: 2rem;
 }
 a{
     text-decoration: none;
@@ -80,3 +78,39 @@ button{
 button:hover{
     border:none;
 }
+/*표 */
+table{
+    margin-left: auto;
+    margin-right: auto;
+    border:1px solid #575756; 
+    border-radius:5px;
+    text-align: center;
+    border-collapse: collapse;
+    padding:2px;
+    }
+    td,tr,th{
+    border:1px solid #575756;
+    padding:10px;
+    }
+    th{
+    width:50px;
+    }
+    .td_title{
+    
+        width:10%;
+    }
+    .td_content{
+       
+        width:15%;
+    }
+    .td_video{
+    
+        width:35%;
+    }
+    .td_img{
+    
+        width:30%;
+    }
+    .td_add{
+       width:10%;
+    }

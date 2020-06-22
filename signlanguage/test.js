@@ -36,8 +36,9 @@ app.use(session({
 }));
 var test = fs.readFileSync('./html/searchpage.ejs', 'utf8');
 var mydir = fs.readFileSync('./html/mydir.ejs', 'utf8');
-var login = fs.readFileSync('./html/login.html', 'utf8');
+var login = fs.readFileSync('./html/login.ejs', 'utf8');
 var main = fs.readFileSync('./html/main.ejs', 'utf8');
+var signup = fs.readFileSync('./html/signup.ejs', 'utf8');
 var loginusername = "";
 var checksession ="";          //로그인 세션 변수
 var lastsearch = new Array();  //최근검색어 저장 리스트
@@ -54,7 +55,7 @@ app.get('/', (req, res) => {
 }else{
   console.log("test2",req.session.id, checksession);
   var page = ejs.render(main, {
-    title: "메인",
+    title: "main",
     data2 : lastsearch,
   });
   }
@@ -62,11 +63,23 @@ app.get('/', (req, res) => {
 });
 app.get('/searchpage', function (req, res) {
   var page = ejs.render(test, {
-    title: "검색창",
+    title: "searchpage",
     data2 : lastsearch,
   });
   res.send(page);
 });
+app.get('/login', function(req, res) {
+  var page = ejs.render(login, {
+    title: "Login",
+  });
+  res.send(page);
+})
+app.get('/signup', function(req, res) {
+  var page = ejs.render(signup, {
+    title: "SIGNUP",
+  });
+  res.send(page);
+})
 app.get('/mydir', function (req, res) {
   console.log("userid", loginusername);
   if (loginusername != "") {      //사전접근에 로그인 필수로 설정
@@ -166,48 +179,57 @@ app.post('/deletedir', function (req, res) {
 });
 
 //회원가입 테스트
-
-app.post('/signup1', function (req, res) {
+app.post('/signup1', function(req, res) {
   console.log("signtest");
   var body = req.body;
-  console.log("sign in test2", body.username, body.password);
-  connection.query('INSERT INTO user(userid,pw) values(?,?)', [body.username, body.password], function (err, rows, fields) {
-    if (!err) {
-      console.log("sign in test1", rows);
-      console.log("sign in test2", body.username, body.password);
-    }
-    else
-      console.log('Error while performing Query.');
-  });
-});
+  if (blankcheck(body.username, body.userID, body.password, body.password_check)) {
+    console.log(body.userID, body.password, body.username);
 
-//로그인 test
-app.post('/login1', function (req, res) {
-  console.log("logintest");
-  var body = req.body;
-  loginusername = body.username;
-  if (loginusername != "") {
-    connection.query('select * from user where userid = ? and pw =?', [body.username, body.password], function (err, row, fields) {
+    connection.query('INSERT INTO user(userid,pw,name) values(?,?,?)', [body.userID, body.password, body.username], function(err, rows, fields) {
       if (!err) {
-        req.session.id = req.body.username;
-        checksession = req.session.id;
-        console.log("sign in test1", req.session.id);
-        req.session.save(function () {
-          res.redirect('/');
-        });
-      }
-      else if (err) console.log("login error");
+        console.log("sign in test1", rows);
+        console.log("sign in test2", body.userID, body.password, body.username);
+        res.redirect('/');
+      } else
+        console.log('Error while performing Query.');
     });
-  } else {
-    var page = ejs.render(main, {
-      title: "메인",
-      text1: "아이디와 비밀번호를 입력해주세요",
-      data2 : lastsearch,
-    });
-    res.send(page);
   }
 });
+//로그인 test
+app.post('/login1', function(req, res) {
+  console.log("logintest");
+  var body = req.body;
+  if (blank(body.userID, body.password)) {
+    console.log('id', body.userID, 'pw', body.password);
+    loginusername = body.userID;
+    connection.query('select * from user where userid = ? and pw =?', [body.userID, body.password], function(err, results, rows) {
+      if (!err) {
+        if (results != '') {
+          loginusername = results[0].name;
+          console.log(results);
+          console.log("이름", results[0].name);
+          req.session.id = req.body.userID;
+          checksession = req.session.id;
+          console.log("sign in test1", req.session.id);
+          req.session.save(function() {
+            res.redirect('/');
+          });
+        } else {
+          console.log("아이디 비번 확인");
+        }
+      } else {
+        console.log("query error");
+      }
+    });
+  }
+  /*var page = ejs.render(login, {
+    title: "메인",
+    text1: "아이디와 비밀번호를 입력해주세요",
+    data2 : lastsearch,
+  });
+  res.send(page);*/
 
+});
 app.get('/logout', function (req, res) {
   console.log("로그아웃")
   loginusername = "";
@@ -217,6 +239,31 @@ app.get('/logout', function (req, res) {
     });
 
 });
+function blankcheck(name, id, pw, pw_ck) { //공백이랑 비밀번호 같은지 검사
+  //아이디 비밀번호 조건주기
+  if (name.length < 1 || id.length < 1 || pw.length < 1 || pw_ck.length < 1) {
+    //이름은 2글자 이상 아이디 비번 6글자 이상
+    console.log("글자수, 공백");
+    return false;
+  } else if (pw != pw_ck) {
+    //비밀번호 검사
+    console.log("비밀번호 다름");
+    return false;
+  } else {
+    console.log("통과");
+    return true;
+  }
+}
+
+function blank(id, pw) {
+  if (id.length < 1 || pw.length < 1) {
+    console.log("공백");
+    return false;
+  } else {
+    console.log("통과");
+    return true;
+  }
+}
 //문장검색에 사용
 /*
 app.post('/search2', function(req,res){

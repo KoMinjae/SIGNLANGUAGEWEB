@@ -15,7 +15,7 @@
   <body>
   <!----타이틀 ----------------------------------------------------------->
    <section class="main-tabs">
-  <h1>수어 학습 사이트</h1>
+  <h1  onclick="movemain()">수어 학습 사이트</h1>
   <h3>나만의 단어장으로 원하는 수어들을 학습해보세요!</h3>
          <!-------------------------검색으로 돌아가기------------------------->
      <div class="menu-tabs-container">
@@ -27,6 +27,8 @@
     </script>
     </div>
   </section>
+  <br>
+  <br>
     <script>
       function postid(clicked_id){
        var form = document.createElement("form");
@@ -41,6 +43,10 @@
        form.appendChild(insert);
        form.submit();
       }
+
+        function movemain() {
+          location.href = "/";
+        }
   </script>
     <form>
     <% if(locals.data){%>
