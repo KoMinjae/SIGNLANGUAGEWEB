@@ -3,7 +3,7 @@ var express = require("express");
 var mysql = require('mysql');
 var ejs = require('ejs');
 var bodyParser = require('body-parser');
-
+var msg = require ('dialog');
 var connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -23,6 +23,7 @@ var sessionStore = new MySQLStore(options);
 var app = express();
 app.use(express.static('public'));//css파일 불러오기
 var path = require('path');
+const { Router } = require('express');
 app.use(express.static(path.join(__dirname,'public')));
 app.use(express.static(path.join(__dirname,'/')));
 
@@ -96,7 +97,10 @@ app.get('/mydir', function (req, res) {
         res.send(page);
       }
       else
+      {
         console.log('Error while performing Query.');
+
+      }
     });
   } else {
     var page = ejs.render(mydir, {
@@ -105,7 +109,9 @@ app.get('/mydir', function (req, res) {
       data2 : lastsearch,
 
     });
-    res.send(page);
+
+    msg.info ("로그인이 필요한 서비스입니다.");
+    res.redirect('/login');
   };
 
 });
@@ -179,7 +185,7 @@ app.post('/deletedir', function (req, res) {
     }
   });
 });
-
+//회원가입 테스트
 app.post('/signup1', function(req, res) {
   console.log("signtest");
   var body = req.body;
@@ -192,7 +198,10 @@ app.post('/signup1', function(req, res) {
         console.log("sign in test2", body.userID, body.password, body.username);
         res.redirect('/');
       } else
+      {
         console.log('Error while performing Query.');
+        msg.info ("이미 존재하는 아이디 입니다.");
+      }
     });
   }
 });
@@ -217,6 +226,7 @@ app.post('/login1', function(req, res) {
           });
         } else {
           console.log("아이디 비번 확인");
+          msg.info ("아이디 또는 비밀번호가 일치하지 않습니다.");
           res.redirect("/login");
         }
       } else {
@@ -235,6 +245,7 @@ app.get('/logout', function (req, res) {
     });
 
 });
+
 function blankcheck(name, id, pw, pw_ck) { //공백이랑 비밀번호 같은지 검사
   //아이디 비밀번호 조건주기
   if (name.length < 1 || id.length < 1 || pw.length < 1 || pw_ck.length < 1) {
