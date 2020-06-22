@@ -4,6 +4,10 @@
     <meta charset="utf-8">
           <link rel="stylesheet" type='text/css' href="css/searchpage.css" type="text/css">
   <link rel='stylesheet' type='text/css' href='vendor/bootstrap/css/bootstrap.min.css'>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap');
+</style>
     <title>
       <%= title %>
     </title>
@@ -36,7 +40,7 @@
   <%}else{%>
     <%}%>
     <form class="login-form", action="/logout", method="get">
-            <button class="menu-tabs" type="submit" value=OK>로그아웃</button>
+            <button style="font-family: 'Sunflower', sans-serif;" class="menu-tabs" type="submit" value=OK>로그아웃</button>
     </form>
   
     </form>
@@ -60,6 +64,9 @@
       <br>
     </form>
 </div>
+  <!----------맨위로 버튼 ------------------------------------------------------------>
+    <a style="position:fixed;bottom:20px;right:75px;" href="#" title="맨 위로">
+  <img class="arrow" src="arrow.png"></a> 
 <!----------------출력창--------------------------------------->
 
 <br><br>

@@ -3,7 +3,7 @@ body{
     text-align: center;
 	text-align : center;
     padding : 10px 0;
-
+    font-family: 'Sunflower', sans-serif;
 }
 /*로그아웃버튼 디자인 맞추기*/
 button{
@@ -14,22 +14,20 @@ button{
 /*사이트 제목*/
 h1 {
     margin: 0;
-    letter-spacing: 1rem;
-    
+    letter-spacing: 1rem;  
 }
 /*사이트 부제목*/
 h3 {
-
     letter-spacing: 0.3rem;
     opacity: 0.6;
 }
-/*플로팅 메뉴*/
+/*최근 검색한 단어*/
 .fixed{
     display: inline-block;
     position: fixed;
     left:90%;
     top: 250px;
-    width: 100px;
+    width: 120px;
     height: 200px;
     border-radius: 15px;
     padding:10px;
@@ -116,13 +114,15 @@ a{
     float:right;
     color:#ffffff
 }
-/*--------------표스타일-----------------------*/
+/*--------------(출력)표스타일-----------------------*/
 table{
 border:1px solid #575756; 
 border-radius:5px;
 text-align: center;
 border-collapse: collapse;
 padding:2px;
+font-family: 'Sunflower', sans-serif;
+
 }
 td,tr,th{
 border:1px solid #575756;
@@ -164,7 +164,7 @@ width:50px;
     font-size: 15px;
     margin: 4px;
     cursor: pointer;
-
+    font-family: 'Sunflower', sans-serif;
 }
 .tdclass:hover{
     color:white;
@@ -172,5 +172,11 @@ width:50px;
     transition: all 0.5s ease;
     cursor: pointer;
     text-decoration: none;
+}
+/*맨위로 버튼*/
+.arrow
+{
+    width:50px;
+    height:50px;
 }
 

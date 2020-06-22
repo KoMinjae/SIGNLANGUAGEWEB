@@ -43,7 +43,6 @@ var loginusername = "";
 var checksession ="";          //로그인 세션 변수
 var lastsearch = new Array();  //최근검색어 저장 리스트
 //첫화면 설정
-
 app.get('/', (req, res) => {
   if(req.session.id==checksession){   //현재세션과 로그인 세션값이 같으면
     console.log("test1",req.session.id, checksession);
@@ -61,6 +60,8 @@ app.get('/', (req, res) => {
   }
   res.send(page);
 });
+
+
 app.get('/searchpage', function (req, res) {
   var page = ejs.render(test, {
     title: "searchpage",
@@ -80,6 +81,7 @@ app.get('/signup', function(req, res) {
   });
   res.send(page);
 })
+
 app.get('/mydir', function (req, res) {
   console.log("userid", loginusername);
   if (loginusername != "") {      //사전접근에 로그인 필수로 설정
@@ -129,7 +131,7 @@ app.post('/search1', function (req, res) {
   connection.query('SELECT * from signlanguage where title LIKE ?', '%' + [body.test1] + '%', function (err, rows, fields) {
     if (!err) {
       var page = ejs.render(test, {
-        title: "검색창",
+        title: "단어 검색",
         data: rows,
         data2 : lastsearch,
 
@@ -178,7 +180,6 @@ app.post('/deletedir', function (req, res) {
   });
 });
 
-//회원가입 테스트
 app.post('/signup1', function(req, res) {
   console.log("signtest");
   var body = req.body;
@@ -216,18 +217,13 @@ app.post('/login1', function(req, res) {
           });
         } else {
           console.log("아이디 비번 확인");
+          res.redirect("/login");
         }
       } else {
         console.log("query error");
       }
     });
   }
-  /*var page = ejs.render(login, {
-    title: "메인",
-    text1: "아이디와 비밀번호를 입력해주세요",
-    data2 : lastsearch,
-  });
-  res.send(page);*/
 
 });
 app.get('/logout', function (req, res) {
@@ -264,30 +260,4 @@ function blank(id, pw) {
     return true;
   }
 }
-//문장검색에 사용
-/*
-app.post('/search2', function(req,res){
-  var body = req.body;
-var mod = require('korean-text-analytics');
-var task = new mod.TaskQueue();
-mod.ExecuteMorphModule("안녕하세요 만나서 반갑습니다.", function(err, rep){
-  console.log(err, rep);
-  console.log(err, rep['morphed']);
-
-  console.log("test:",rep['morphed'][0]['word']);
-
-  connection.query('SELECT * from signlanguage where title = ?',[rep['morphed'][0]['word']], function(err, rows, fields) {
-    if (!err){
-      var page = ejs.render(test,{
-      title : "good",
-      data : rows,
-      });
-      res.send(page);
-      console.log('The solution is: ', rows);
-      }
-      else
-        console.log('Error while performing Query.');
-      });
-  });
-});*/
 app.listen(3000);

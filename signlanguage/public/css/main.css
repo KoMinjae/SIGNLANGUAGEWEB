@@ -1,15 +1,17 @@
 /*main.css*/
+
 body{
     text-align: center;
 	text-align : center;
     padding : 10px 0;
-
+    font-family: 'Sunflower', sans-serif;
 }
 
 section{
     padding:15px 10px 10px 10px;
     margin:5px 5px 0px 5px;
     background-color:#eee;
+    font-family: 'Sunflower', sans-serif;
 }
 /*사이트 제목*/
 h1 {
@@ -19,6 +21,7 @@ h1 {
 }
 /*사이트 부제목*/
 h3 {
+    font-family: 'Sunflower', sans-serif;
     letter-spacing: 0.3rem;
     opacity: 0.6;
 }
@@ -33,6 +36,7 @@ h3 {
     background: #eee;
     border-radius: 15px;
     padding:10px;
+    font-family: 'Sunflower', sans-serif;
 }
 /*메뉴탭*/
 .main-tabs
@@ -87,6 +91,7 @@ a:hover{
 /*로그아웃 버튼 스타일 */
 button
 {
+font-family: 'Sunflower', sans-serif;
 background-color: white;
 border: none;
 height:70px;
@@ -117,30 +122,34 @@ img {vertical-align: middle;}
 }
 /*구글 차트*/
 #chart_div{
+    font-family: 'Sunflower', sans-serif;
     margin:20px;
     margin-top:70px;
-    margin-left: 223px;
+    margin-left: 200px;
     float: left;
     background-color: "transparent"
  }
 /*구글맵*/
 #map{
+    font-family: 'Sunflower', sans-serif;
      margin:20px;
      margin-top:70px;
-     width:480px; 
+     width:500px; 
      height: 400px;
-     margin-right: 223px;
+     margin-right: 240px;
      float:right;
  }
  /*사이트 이동*/
 #footer{
-    bottom: 0;
+    font-family: 'Sunflower', sans-serif;
 	height: 200px;
     width:100%;
 	background-color: whitesmoke;
     text-align: center;
     margin-top:500px;
-    
+    bottom:0px;
+    overflow: hidden;
+
 }
 select{
     width: 500px;
@@ -150,6 +159,10 @@ select{
     border-radius: 3px;
     -moz-appearance: none;
     appearance: none;
-
+}
+.arrow
+{
+    width:50px;
+    height:50px;
 }
 

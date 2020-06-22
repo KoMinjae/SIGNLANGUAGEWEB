@@ -4,7 +4,9 @@
 <head>
   <title>Signup</title>
   <link rel="stylesheet" type="text/css" href="css/signup.css">
-
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap');
+</style>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -17,19 +19,19 @@
 <body>
   <div class="wrapper">
     <div class="Sign">
-      <h2>수어 학습 사이트</h2>
-      <p class="c" onclick="movemain()">메인 페이지로</p>
+      <h2 style="font-family: 'Sunflower', sans-serif;"onclick="movemain()">수어 학습 사이트</h2>
+      <p style="font-family: 'Sunflower', sans-serif;" class="c" onclick="movemain()">메인 페이지로</p>
     </div>
 
     <div class="box">
-      <p class="title">회원가입</p>
+      <p class="title" style="font-family: 'Sunflower', sans-serif;">회원가입</p>
       <hr>
       <form class="login-form" action="/signup1" method="post">
-        <input type="text" name="username" placeholder="이름" />
-        <input type="text" name="userID" placeholder="아이디" />
-        <input type="password" name="password" placeholder="비밀번호" />
-        <input type="password" name="password_check" placeholder="비밀번호 확인" />
-        <button type="submit" id="asdf" value=SIGNUP onclick="check();">가입하기</button>
+        <input style="font-family: 'Sunflower', sans-serif;"type="text" name="username" placeholder="이름" />
+        <input style="font-family: 'Sunflower', sans-serif;"type="text" name="userID" placeholder="아이디" />
+        <input style="font-family: 'Sunflower', sans-serif;"type="password" name="password" placeholder="비밀번호" />
+        <input style="font-family: 'Sunflower', sans-serif;"type="password" name="password_check" placeholder="비밀번호 확인" />
+        <button style="font-family: 'Sunflower', sans-serif;"type="submit" id="asdf" value=SIGNUP onclick="check();">가입하기</button>
       </form>
     </div>
   </div>

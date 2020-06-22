@@ -1,14 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri&display=swap');
 /*로그인 css*/
 .wrapper {
-	font-family: 'Hind Siliguri', sans-serif;
+	font-family: 'Sunflower', sans-serif;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	padding-top: 150px;
+
 }
 .login-form {
 	border-style:block;
+	font-family: 'Sunflower', sans-serif;
 }
 .box {
 	position:relative;
@@ -16,7 +17,7 @@
 	padding-right:30px;
 	width:350px;
 	height:400px;
-
+    font-family: 'Sunflower', sans-serif;
 	border:1px solid #66B1F2;
 	border-radius: 0px 5px 5px 0px;
 	background: #ffffff;
@@ -25,32 +26,39 @@
 }
 .title {
 	font-size:30px;
+
 }
  h2{
 	justify-content: center;
 	padding-top:100px;
 	display: flex;
+
  }
  .Sign {
 	color:#ffffff;
 	width:300px;
 	height:400px;
 	background: rgba(102,177,241,0.8);
+
  }
 input {
 	width:95%;
 	padding:10px 0px 10px 10px;
   border: 1px solid #CFCFCF;
 	border-radius:5px;
+
 }
 input[type="text"] {
 	margin:10px;
+
 }
 input[type="password"] {
 	margin:10px;
+
 }
 .login-form{
 	align-items: center;
+
 }
 
 #asdf{
@@ -62,11 +70,13 @@ input[type="password"] {
 	border: 1px solid #66B1F2;
 	font-size:15px;
 	transition: all 0.5s ease;
+
 }
 #asdf:hover{
 	background: rgba(102,177,241,0.8);
 	color:#ffffff;
 	transition: all 0.5s ease;
+
 }
 
 .b{
@@ -75,7 +85,7 @@ input[type="password"] {
 .c {
 	justify-content: center;
 	display: flex;
-	margin:100px 50px 0px 50px;
+	margin:50px 50px 0px 50px;
 	padding:10px;
 	border: 1px solid #ffffff;
 	border-radius: 50px;

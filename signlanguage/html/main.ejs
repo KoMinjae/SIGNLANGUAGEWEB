@@ -7,10 +7,15 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
-
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap');
+</style>
+<header>
   <title>수어 학습 사이트</title>
+</header>
  </head>
  <body>
+
    <!--메뉴 main-tabs -->
  <section class="main-tabs" style="background-color:#eee'">
   <h1  onclick="movemain()">수어 학습 사이트</h1>
@@ -30,6 +35,9 @@
  
   </div>
   </section>
+  <a style="position:fixed;bottom:20px;right:75px;" href="#" title="맨 위로">
+  <img class="arrow" src="arrow.png"></a> 
+
   <!--페이지 이동 스크립트 ------>
       <script>
       function movepage(){
@@ -54,7 +62,7 @@
     </script>
 <!----------------------이미지 슬라이드 :오늘의 수어단어----------------------->
 <div class="container-fluid text-center bg-1">
-<h3 style="text-algin:center">오늘의 수어단어</h3>
+<h3 style="text-algin:center;font-family: 'Sunflower', sans-serif;">오늘의 수어단어</h3>
 <img src="word1.png" id="mainImage"alt="오늘의단어1" style="width:70%;height:300px;">
 </div>
 
@@ -71,16 +79,18 @@
   </script>
   <%}%>
   </div>
+  <div>
 <!-------구글맵 출력------------------------------------->
 <div id="map" ></div>
 <!-------구글차트 출력------------------------------------->
 <div id="chart_div"></div>
  <!----사이트 이동 --->
+ </div>
 <br><br>
 <div id="footer">
 <br><br>
-        <select class="select_footer" onchange="window.open(value,'_blank');">
-          <option value="">---사이트 선택---</option>
+        <select onchange="window.open(value,'_blank');">
+          <option value="">--------------------------------   관련 사이트   --------------------------------</option>
           <option value="http://slitt.deafkorea.com/">한국농아인협회</option>
           <option value="http://sldict.korean.go.kr/front/main/main.do">한국수어사전</option>
         </select>
@@ -116,7 +126,7 @@
 					  pieSliceText: 'label',
 					  slices:{
 						  0: {offset: 0, color: 'silver'},
-						  1: {offset: 0, color: 'red'},
+						  1: {offset: 0, color: 'lightgray'},
 						  2: {offset: 0, color: 'gray'},
 						  3: {offset: 0.1, color: 'blue'},
 
@@ -129,7 +139,6 @@
         chart.draw(data, options);
       }
     </script>
-
 <script>
  //구글맵 스크립트
 function myMap() {  
@@ -166,8 +175,7 @@ if(imageIndex>=imageArray.length){
 }
 setInterval(changeImage,3000);
 </script>
-
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfgakhKeLvDJdWLNdPbMlW6TGw0392K8k&callback=myMap"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </body>
 </html>
