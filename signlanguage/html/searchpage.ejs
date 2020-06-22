@@ -25,6 +25,10 @@
          form.appendChild(insert);
          form.submit();
         }
+         function movelogin() {
+          location.href = "/login";
+        }
+        
     </script>
   </head>
   <body>
@@ -35,13 +39,17 @@
     <!------------로그아웃, 단어장---------------------->
    <div class="menu-tabs-container">
 
-      <%if(locals.text){%>
+      <%if(locals.logindata==""){%>
+        <form class="login-form", action="/login", method="get">
+          <button style="font-family: 'Sunflower', sans-serif;" class="menu-tabs" type="submit" value="OK">로그인</button>
+        </form>
   <%=locals.text%>
   <%}else{%>
-    <%}%>
     <form class="login-form", action="/logout", method="get">
-            <button style="font-family: 'Sunflower', sans-serif;" class="menu-tabs" type="submit" value=OK>로그아웃</button>
-    </form>
+      <button style="font-family: 'Sunflower', sans-serif;" class="menu-tabs" type="submit" value="OK">로그아웃</button>
+  </form>
+    <%}%>
+    
   
     </form>
       <a class="menu-tabs" onclick="movepage()">나만의 단어장</a>

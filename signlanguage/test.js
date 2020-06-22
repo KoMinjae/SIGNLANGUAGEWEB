@@ -67,6 +67,7 @@ app.get('/searchpage', function (req, res) {
   var page = ejs.render(test, {
     title: "searchpage",
     data2 : lastsearch,
+    logindata: loginusername,
   });
   res.send(page);
 });
