@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+          <link rel="stylesheet" type='text/css' href="css/searchpage.css" type="text/css">
+  <link rel='stylesheet' type='text/css' href='vendor/bootstrap/css/bootstrap.min.css'>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap');
+</style>
+    <title>
+      <%= title %>
+    </title>
+    <script>
+        function postid(clicked_id){
+         var form = document.createElement("form");
+         form.setAttribute("method", "post");
+         form.setAttribute("action","/adddir1");
+         document.body.appendChild(form);
+
+         var insert = document.createElement('input');
+         insert.setAttribute("type","hidden");
+         insert.setAttribute("name","test2");
+         insert.setAttribute("value",clicked_id);
+         form.appendChild(insert);
+         form.submit();
+        }
+    </script>
+  </head>
+  <body>
+ <!-----메인--------------------------> 
+  <section class="main-tabs" >
+  <h1 onclick="movemain()">수어 학습 사이트</h1>
+  <h3>나만의 단어장으로 원하는 수어들을 학습해보세요!</h3>
+    <!------------로그아웃, 단어장---------------------->
+   <div class="menu-tabs-container">
+
+      <%if(locals.text){%>
+  <%=locals.text%>
+  <%}else{%>
+    <%}%>
+    <form class="login-form", action="/logout", method="get">
+            <button style="font-family: 'Sunflower', sans-serif;" class="menu-tabs" type="submit" value=OK>로그아웃</button>
+    </form>
+  
+    </form>
+      <a class="menu-tabs" onclick="movepage()">나만의 단어장</a>
+   </div>
+    <script>
+      function movepage(){
+        location.href = "/mydir";
+      }
+           function movemain(){
+        location.href = "/";
+      }
+    </script>
+  </section>
+  
+  <!------- 검색 창------->
+  <br><br>
+  <div class="search">
+    <form name="search_form" action="/search1" method="post">
+      <input id="input" type="text" name="test1" placeholder="단어 입력" />
+      <br>
+    </form>
+</div>
+  <!----------맨위로 버튼 ------------------------------------------------------------>
+    <a style="position:fixed;bottom:20px;right:75px;" href="#" title="맨 위로">
+  <img class="arrow" src="arrow.png"></a> 
+<!----------------출력창--------------------------------------->
+
+<br><br>
+    <form>
+    <% if(locals.data){%>
+      <table style="margin-left: 60px; margin-right: 160px;">
+        <tr>
+          <td class="td_title" >용어</td>
+          <td class="td_content">한국어 정보</td>
+          <td class="td_video">영상</td>
+          <td class="td_img">수형사진</td>
+          <td class="td_add">단어장에 추가하기</td>
+        </tr>
+        <% for(let i = 0; i<data.length; i++){%>
+          <tr>
+            <td><%=data[i].title%></td>
+            <td><%=data[i].des%></td>
+            <td><video width="400" height="400" src=<%=data[i].video%> autoplay="autoplay"></video></td>
+            <td><img width="200" height="200" src=<%=data[i].img%>></img></td>
+            <td><input type="button" class="tdclass" id=<%=data[i].slid%> value="추가" onclick="postid(this.id)"></input></td>
+          </tr>
+          <%}%>
+        <%}%>
+      </table>
+    </form>
+ <div class="fixed">
+ <p >최근 검색한 단어</p>
+      <%if(locals.data2)%>
+      <p><%=locals.data2[0]%></p>
+      <p><%=locals.data2[1]%></p>
+      <p><%=locals.data2[2]%></p>
+      <%if(locals.text1){%>
+  <script>
+    alert(locals.text1)
+  </script>
+  <%}%>
+  </div>
+  </body>
+
+</html>
